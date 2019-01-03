@@ -1,0 +1,38 @@
+<div class="form-group">
+    <div class="col-sm-12">
+        <p style="font-size: 14px;">{{ description }} <b>{{ telephone }}</b></p>
+    </div>
+</div>
+<div class="buttons">
+    <div class="pull-right">
+        <input type="button" class="btn btn-primary" data-loading-text="{{ text_loading }}" id="submit" value="Confirm"/>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#submit').bind('click', function () {
+        $.ajax({
+            url: 'index.php?route=extension/payment/beyonic/send/',
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            beforeSend: function () {
+                $('#submit').button('loading');
+            },
+            complete: function () {
+                $('#submit').button('reset');
+            },
+            success: function (json) {
+
+
+                if (json['error']) {
+                    alert(json['error']);
+                }
+
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+            }
+        });
+    });
+</script>
+

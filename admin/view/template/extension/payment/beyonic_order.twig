@@ -1,0 +1,24 @@
+<h2>{{ text_payment_info }}</h2>
+<div class="alert alert-success" id="beyonic_transaction_msg" style="display:none;"></div>
+<table class="table table-striped table-bordered" id="cybersource_transactions">
+    <thead>
+        <tr>
+            <td class="text-left"><strong>{{ text_column_transaction_id }}</strong></td>
+            <td class="text-left"><strong>{{ text_column_date_added }}</strong></td>
+            <td class="text-left"><strong>{{ text_column_type }}</strong></td>
+            <td class="text-left"><strong>{{ text_column_amount }}</strong></td>
+            <td class="text-left"><strong>{{ text_column_comment }}</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in beyonic_order['transactions'] %}
+            <tr>
+                <td class="text-left">{{ transaction['beyonic_transaction_id'] }}</td>
+                <td class="text-left">{{ transaction['date_added'] }}</td>
+                <td class="text-left">{{ transaction['type'] }}</td>
+                <td class="text-left">{{ transaction['amount'] }}</td>
+                <td class="text-left">{{ transaction['note'] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

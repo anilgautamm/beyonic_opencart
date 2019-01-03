@@ -1,0 +1,86 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-beyonic" class="btn btn-primary"><i class="fa fa-check-circle"></i> {{ button_save }}</button>
+                <a href="{{ cancel }}" class="btn btn-default"><i class="fa fa-reply"></i> {{ button_cancel }}</a></div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                    {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i>{{ text_edit }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-beyonic" class="form-horizontal">
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-beyonic-api-key"><span data-toggle="tooltip" title="{{ help_apikey }}">{{ text_apikey }}</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_beyonic_api_key" value="{{ payment_beyonic_api_key }}" placeholder="{{ text_apikey }}" id="payment_beyonic_api_key" class="form-control" />
+                            {% if error_api_key %}
+                                <div class="text-danger">{{ error_api_key }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-beyonic_desc"><span data-toggle="tooltip" title="{{ help_description }}">{{ text_description }}</span></label>
+                        <div class="col-sm-10">
+                            <textarea name="payment_beyonic_desc"  id="beyonic_desc" class="form-control" rows="2">{{ payment_beyonic_desc }} </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-beyonic_desc2"><span data-toggle="tooltip" title="{{ help_description2 }}">{{ text_description2 }}</span></label>
+                        <div class="col-sm-10">
+                            <textarea name="payment_beyonic_desc2"  id="beyonic_desc2" class="form-control" rows="2">{{ payment_beyonic_desc2 }} </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-beyonic-ipn"><span data-toggle="tooltip" title="{{ help_ipn }}">{{ text_ipn }}</span></label>
+                        <div class="col-sm-10">
+                            <input name="payment_beyonic_ipn"  id="beyonic_ipn" class="form-control" value="{{ payment_beyonic_ipn }}" readonly/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip" title="{{ help_total }}">{{ entry_total }}</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_beyonic_total" value="{{ payment_beyonic_total }}" placeholder="{{ entry_total }}" id="input-total" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_beyonic_status" id="input-status" class="form-control">
+                                {% if payment_beyonic_status %}
+                                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                                    <option value="0">{{ text_disabled }}</option>
+                                {% else %}
+                                    <option value="1">{{ text_enabled }}</option>
+                                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-beyonic-sort_order">{{ entry_sort_order }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_beyonic_sort_order" value="{{ payment_beyonic_sort_order }}" placeholder="{{ entry_sort_order }}" id="payment_beyonic_sort_order" class="form-control" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}
